@@ -1,6 +1,7 @@
 package tn.esprit.spring.kaddem.service;
 
 import tn.esprit.spring.kaddem.entities.Departement;
+import tn.esprit.spring.kaddem.entities.Etudiant;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface IDepartementService {
     Departement updateDepartement (Departement d);
 
     Departement retrieveDepartement (Integer idDepart);
+
+    List<Etudiant> getEtudiantsByDepartement (Integer idDepartement);
 }

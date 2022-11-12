@@ -14,7 +14,8 @@ import java.util.Optional;
 @Repository
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
 
-    Etudiant findByNomEAndPrenomE(String nomE,String prenomE);
+    Etudiant findByNomEAndPrenomE(String nomE, String prenomE);
+
     List<Etudiant> findByDepartementIdDepartement(Integer idDepartement);
 
     List<Etudiant> findByEquipeListNiveau(Niveau niveau);

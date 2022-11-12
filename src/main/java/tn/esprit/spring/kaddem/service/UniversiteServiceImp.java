@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tn.esprit.spring.kaddem.entities.Departement;
 import tn.esprit.spring.kaddem.entities.Universite;
 import tn.esprit.spring.kaddem.repository.UniversiteRepository;
 
+import java.util.Date;
 import java.util.List;
 @Service
 @AllArgsConstructor
@@ -42,5 +44,15 @@ public class UniversiteServiceImp implements IUniversiteService {
         Universite universite=retrieveUniversite(idUniversite);
         universite.getDepartementList().add(departementServiceImp.retrieveDepartement(idDepartement));
         updateUniversite(universite);
+    }
+
+    @Override
+    public List<Departement> retrieveDepartementsByUniversite(Integer idUniversite) {
+        return retrieveUniversite(idUniversite).getDepartementList();
+    }
+
+    @Override
+    public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {
+        return 0;
     }
 }

@@ -7,6 +7,7 @@ import tn.esprit.spring.kaddem.entities.Etudiant;
 import tn.esprit.spring.kaddem.repository.ContratRepository;
 import tn.esprit.spring.kaddem.repository.EtudiantRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,17 +46,24 @@ public class ContratServiceImp implements IContratService {
     public Contrat affectContratToEtudiant(Contrat ce, String nomE, String prenomE) {
         Etudiant etudiant = etudiantRepository.findByNomEAndPrenomE(nomE, prenomE);
         if (etudiant != null) {
+            System.out.println("etudiant existe");
             int nombreContratActif = 0;
             for (Contrat contrat : etudiant.getContratList()) {
-                if (contrat.getArchive() == true)
+                if (contrat.getArchive() != true)
                     nombreContratActif++;
             }
             if (nombreContratActif < 5) {
                 ce.setEtudiant(etudiant);
-                ce.setArchive(true);
+              //  ce.setArchive(true);
                 updateContrat(ce);
             }
-        }
+        }else
+            System.out.println("etudiant non existant");
         return ce;
+    }
+
+    @Override
+    public Integer nbContratsValides(Date startDate, Date endDate) {
+            return contratRepository.countByDateFinContratIsBetweenanAndAndArchiveIsNot(startDate,  endDate, true);
     }
 }

@@ -10,6 +10,7 @@ import tn.esprit.spring.kaddem.repository.ContratRepository;
 import tn.esprit.spring.kaddem.repository.EtudiantRepository;
 import tn.esprit.spring.kaddem.service.IContratService;
 
+import java.util.Date;
 import java.util.List;
 
 @Tag(name = "Contrat Management")
@@ -28,11 +29,13 @@ public class ContratRestController {
         List<Contrat> listContrats = contratService.retrieveAllContrats();
         return listContrats;
     }
+
     @Operation(description = "retrieve Contrat")
     @GetMapping("/retrieve-Contrat/{Contrat-id}")
     public Contrat retrieveContrat(@PathVariable("Contrat-id") Integer ContratId) {
         return contratService.retrieveContrat(ContratId);
     }
+
     @Operation(description = "add Contrat")
     @PostMapping("/add-Contrat")
     public Contrat addContrat(@RequestBody Contrat e) {
@@ -48,8 +51,14 @@ public class ContratRestController {
     }
 
     @Operation(description = "affect Contrat To Etudiant")
-    @PutMapping("/affectContratToEtudiant")
-    public Contrat affectContratToEtudiant(@RequestBody Contrat contrat, @RequestBody String nomE, @RequestBody String prenomE) {
+    @PostMapping("/affectContratToEtudiant")
+    public Contrat affectContratToEtudiant(@RequestBody Contrat contrat, @RequestParam String nomE, @RequestParam String prenomE) {
         return contratService.affectContratToEtudiant(contrat, nomE, prenomE);
+    }
+
+    @Operation(description = "nb Contrats Valides")
+    @GetMapping("/nbContratsValides")
+    public Integer nbContratsValides(@RequestParam Date startDate,@RequestParam Date endDate){
+        return contratService.nbContratsValides(startDate, endDate);
     }
 }

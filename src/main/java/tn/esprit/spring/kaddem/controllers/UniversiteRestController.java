@@ -52,4 +52,11 @@ public class UniversiteRestController {
     public void assignUniversiteToDepartement(@RequestParam Integer idUniversite, @RequestParam Integer idDepartement) {
         universiteService.assignUniversiteToDepartement(idUniversite, idDepartement);
     }
+    @Operation(description = "retrieve Departements By Universite")
+    @GetMapping("/retrieveDepartementsByUniversite")
+    public List<Departement> retrieveDepartementsByUniversite( @RequestParam Integer idUniversite) {
+        return universiteService.retrieveDepartementsByUniversite(idUniversite);
+    }
+
+
 }

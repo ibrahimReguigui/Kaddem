@@ -15,11 +15,14 @@ public class Equipe implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEquipe;
+
     private String nomEquipe;
+
     @Enumerated(EnumType.STRING)
     private Niveau niveau;
+
     @ManyToMany(mappedBy = "equipeList")
     private List<Etudiant> etudiantList;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private DetailEquipe detailEquipe;
 }

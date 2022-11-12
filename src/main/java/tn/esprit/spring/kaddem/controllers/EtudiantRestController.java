@@ -8,6 +8,7 @@ import tn.esprit.spring.kaddem.entities.Etudiant;
 import tn.esprit.spring.kaddem.service.IEtudiantService;
 
 import java.util.List;
+
 @Tag(name = "Etudiant Management")
 @RestController
 @AllArgsConstructor
@@ -22,24 +23,28 @@ public class EtudiantRestController {
         List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
         return listEtudiants;
     }
+
     @Operation(description = "retrieve etudiant")
     @GetMapping("/retrieve-etudiant/{etudiant-id}")
     public Etudiant retrieveEtudiant(@PathVariable("etudiant-id") Integer etudiantId) {
         return etudiantService.retrieveEtudiant(etudiantId);
     }
+
     @Operation(description = "add etudiant")
     @PostMapping("/add-etudiant")
-    public void addEtudiant(@RequestBody Etudiant e,@RequestParam (required = false) Integer idContrat,
-                                @RequestParam (required = false) Integer idEquipe) {
-        if (idContrat!=null && idEquipe!=null)
-            etudiantService.addAndAssignEtudiantToEquipeAndContract(e,idContrat,idEquipe);
+    public void addEtudiant(@RequestBody Etudiant e, @RequestParam(required = false) Integer idContrat,
+                            @RequestParam(required = false) Integer idEquipe) {
+        if (idContrat != null && idEquipe != null)
+            etudiantService.addAndAssignEtudiantToEquipeAndContract(e, idContrat, idEquipe);
         else
             etudiantService.addEtudiant(e);
     }
+
     @Operation(description = "update etudiant")
     @PutMapping("/update-etudiant")
     public Etudiant updateEtudiant(@RequestBody Etudiant e) {
         Etudiant etudiant = etudiantService.updateEtudiant(e);
         return etudiant;
     }
+
 }

@@ -53,4 +53,10 @@ public class DepartementRestController {
         departementService.updateDepartement(departement);*/
         departementService.assignEtudiantToDepartement(etudiantId,departementId);
     }
+    @Operation(description = "get Etudiants By Departement")
+    @GetMapping("/getEtudiantsByDepartement")
+    public List<Etudiant> getEtudiantsByDepartement(@RequestParam Integer idDepartement) {
+        return departementService.getEtudiantsByDepartement(idDepartement);
+    }
+
 }

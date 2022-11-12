@@ -1,5 +1,6 @@
 package tn.esprit.spring.kaddem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -19,6 +20,7 @@ public class Departement implements Serializable {
     Integer idDepartement;
     String nomDepartement;
     @OneToMany(mappedBy = "departement")
+    @JsonIgnore
     List<Etudiant> etudiantList;
 
 }

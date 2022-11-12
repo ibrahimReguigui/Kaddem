@@ -1,5 +1,6 @@
 package tn.esprit.spring.kaddem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -26,6 +27,7 @@ public class Contrat implements Serializable {
     Boolean archive;
     Integer montantContrat;
     @ManyToOne
+    @JsonIgnore
     Etudiant etudiant;
 
 }

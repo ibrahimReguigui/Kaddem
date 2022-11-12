@@ -43,4 +43,8 @@ public class DepartementServiceImp implements IDepartementService {
     public Departement retrieveDepartement(Integer idDepart) {
         return departementRepository.findById(idDepart).get();
     }
+    @Override
+    public List<Etudiant> getEtudiantsByDepartement(Integer idDepartement) {
+        return retrieveDepartement(idDepartement).getEtudiantList();
+    }
 }

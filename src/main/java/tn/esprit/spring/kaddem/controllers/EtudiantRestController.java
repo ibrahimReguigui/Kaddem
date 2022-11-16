@@ -32,12 +32,13 @@ public class EtudiantRestController {
 
     @Operation(description = "add etudiant")
     @PostMapping("/add-etudiant")
-    public void addEtudiant(@RequestBody Etudiant e, @RequestParam(required = false) Integer idContrat,
+    public Etudiant addEtudiant(@RequestBody Etudiant e, @RequestParam(required = false) Integer idContrat,
                             @RequestParam(required = false) Integer idEquipe) {
         if (idContrat != null && idEquipe != null)
             etudiantService.addAndAssignEtudiantToEquipeAndContract(e, idContrat, idEquipe);
         else
             etudiantService.addEtudiant(e);
+        return e;
     }
 
     @Operation(description = "update etudiant")

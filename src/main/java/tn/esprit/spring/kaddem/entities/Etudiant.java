@@ -32,9 +32,11 @@ public class Etudiant implements Serializable {
     @ManyToOne
     private Departement departement;
     @ManyToMany
+    @JsonIgnore
     private List<Equipe> equipeList;
 
     @OneToMany(mappedBy = "etudiant")
+    @JsonIgnore
     private List<Contrat> contratList;
 
 }

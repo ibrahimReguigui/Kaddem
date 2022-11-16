@@ -11,6 +11,7 @@ import tn.esprit.spring.kaddem.entities.Etudiant;
 import tn.esprit.spring.kaddem.repository.DepartementRepository;
 import tn.esprit.spring.kaddem.repository.EtudiantRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,11 +53,18 @@ public class EtudiantServiceImp implements IEtudiantService {
 
     @Transactional
     public Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe) {
-        Etudiant etudiant=etudiantRepository.save(e);
-        System.out.println(etudiant);
-        etudiant.getEquipeList().add(equipeServiceImp.retrieveEquipe(idEquipe));
-        etudiantRepository.save(etudiant);
-        return etudiant;
+        if(e.getEquipeList()==null){
+            List list=new ArrayList<Equipe>();
+            list.add(equipeServiceImp.retrieveEquipe(idEquipe));
+            e.setEquipeList(list);
+        }else{
+            e.getEquipeList().add(equipeServiceImp.retrieveEquipe(idEquipe));
+        }
+        Contrat c=contratServiceImp.retrieveContrat(idContrat);
+        c.setEtudiant(e);
+        contratServiceImp.updateContrat(c);
+        etudiantRepository.save(e);
+        return e;
     }
 
     @Override

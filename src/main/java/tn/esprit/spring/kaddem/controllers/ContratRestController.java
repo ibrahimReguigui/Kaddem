@@ -10,6 +10,8 @@ import tn.esprit.spring.kaddem.repository.ContratRepository;
 import tn.esprit.spring.kaddem.repository.EtudiantRepository;
 import tn.esprit.spring.kaddem.service.IContratService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +60,14 @@ public class ContratRestController {
 
     @Operation(description = "nb Contrats Valides")
     @GetMapping("/nbContratsValides")
-    public Integer nbContratsValides(@RequestParam Date startDate,@RequestParam Date endDate){
-        return contratService.nbContratsValides(startDate, endDate);
+    public Integer nbContratsValides(@RequestParam String startDate,@RequestParam String endDate){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Date dateDebut = dateFormat.parse(startDate);
+            Date dateFin = dateFormat.parse(endDate);
+            return contratService.nbContratsValides(dateDebut, dateFin);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

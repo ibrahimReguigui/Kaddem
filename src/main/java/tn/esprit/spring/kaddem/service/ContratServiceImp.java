@@ -49,12 +49,12 @@ public class ContratServiceImp implements IContratService {
             System.out.println("etudiant existe");
             int nombreContratActif = 0;
             for (Contrat contrat : etudiant.getContratList()) {
-                if (contrat.getArchive() != true)
+                if (contrat.getArchive() != false)
                     nombreContratActif++;
             }
             if (nombreContratActif < 5) {
                 ce.setEtudiant(etudiant);
-              //  ce.setArchive(true);
+                ce.setArchive(true);
                 updateContrat(ce);
             }
         }else
@@ -62,8 +62,10 @@ public class ContratServiceImp implements IContratService {
         return ce;
     }
 
-    @Override
+
+ @Override
     public Integer nbContratsValides(Date startDate, Date endDate) {
-            return contratRepository.countByDateFinContratIsBetweenanAndAndArchiveIsNot(startDate,  endDate, true);
+            return contratRepository.nbContratsValides(startDate,  endDate, !true);
     }
+
 }

@@ -13,4 +13,6 @@ public interface ContratRepository extends JpaRepository<Contrat,Integer> {
 //    Integer countByDateFinContratIsBetweenanAndAndArchiveIsNot(Date startDate, Date endDate,Boolean status);
     @Query(value = "select count(c) from Contrat c where c.dateDebutContrat>?1 and c.dateFinContrat<?2 and c.archive=?3")
     Integer nbContratsValides(Date startDate, Date endDate,boolean statut);
+
+
 }

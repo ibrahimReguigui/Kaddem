@@ -17,4 +17,6 @@ public interface IContratService {
 
     Contrat affectContratToEtudiant (Contrat ce, String nomE,String prenomE);
     Integer nbContratsValides(Date startDate, Date endDate);
+
+    void retrieveAndUpdateStatusContrat();
 }

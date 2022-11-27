@@ -3,9 +3,9 @@ package tn.esprit.spring.kaddem.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.kaddem.entities.Contrat;
-import tn.esprit.spring.kaddem.entities.Departement;
 import tn.esprit.spring.kaddem.repository.ContratRepository;
 import tn.esprit.spring.kaddem.repository.EtudiantRepository;
 import tn.esprit.spring.kaddem.service.IContratService;
@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/contrat")
+@Slf4j
 public class ContratRestController {
 
     IContratService contratService;
@@ -28,7 +29,10 @@ public class ContratRestController {
     @Operation(description = "retrieve all Contrats")
     @GetMapping("/retrieve-all-Contrats")
     public List<Contrat> getContrats() {
+        long startDate= new Date().getTime();
         List<Contrat> listContrats = contratService.retrieveAllContrats();
+        long endDate= new Date().getTime();
+        log.info("Temps d execution: "+String.valueOf(endDate-startDate));
         return listContrats;
     }
 

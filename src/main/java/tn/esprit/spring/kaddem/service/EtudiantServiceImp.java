@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.entities.Equipe;
 import tn.esprit.spring.kaddem.entities.Etudiant;
-import tn.esprit.spring.kaddem.repository.DepartementRepository;
 import tn.esprit.spring.kaddem.repository.EtudiantRepository;
 
 import java.util.ArrayList;

@@ -1,12 +1,16 @@
 package tn.esprit.spring.kaddem.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.entities.Etudiant;
 import tn.esprit.spring.kaddem.repository.ContratRepository;
 import tn.esprit.spring.kaddem.repository.EtudiantRepository;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +70,22 @@ public class ContratServiceImp implements IContratService {
  @Override
     public Integer nbContratsValides(Date startDate, Date endDate) {
             return contratRepository.nbContratsValides(startDate,  endDate, !true);
+    }
+
+    @Override
+    @Scheduled(cron = "0 0 13 * * *")
+    public void retrieveAndUpdateStatusContrat() {
+        List<Contrat> contrat=contratRepository.findAll();
+        for (Contrat c:contrat){
+            Long remainingDays=Duration.between(LocalDate.now(),c.getDateFinContrat().toInstant()).toDays();
+            if (remainingDays<=15){
+                System.out.println(c);
+                if(remainingDays<=0){
+                    c.setArchive(true);
+                    contratRepository.save(c);
+                }
+            }
+        }
     }
 
 }

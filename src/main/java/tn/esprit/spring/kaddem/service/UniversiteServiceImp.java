@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.entities.Departement;
 import tn.esprit.spring.kaddem.entities.Universite;
+import tn.esprit.spring.kaddem.repository.ContratRepository;
 import tn.esprit.spring.kaddem.repository.UniversiteRepository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -17,6 +20,7 @@ public class UniversiteServiceImp implements IUniversiteService {
     private UniversiteRepository universiteRepository;
 
     private DepartementServiceImp departementServiceImp;
+    private ContratRepository contratRepository;
 
 
     @Override
@@ -53,6 +57,14 @@ public class UniversiteServiceImp implements IUniversiteService {
 
     @Override
     public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {
+        List<Contrat> contratList= contratRepository.findAll();
+        List<Contrat> contratValides=new ArrayList<>();
+        for(Contrat contrat:contratList){
+            if(contrat.getArchive()!=true){
+                contratValides.add(contrat);
+            }
+        }
+
         return 0;
     }
 }

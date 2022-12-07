@@ -6,4 +6,6 @@ import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.entities.Universite;
 @Repository
 public interface UniversiteRepository extends JpaRepository<Universite,Integer> {
+
+
 }

@@ -21,7 +21,7 @@ public class Equipe implements Serializable {
     @Enumerated(EnumType.STRING)
     private Niveau niveau;
 
-    @ManyToMany(mappedBy = "equipeList")
+    @ManyToMany(mappedBy = "equipeList",fetch = FetchType.EAGER)
     private List<Etudiant> etudiantList;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private DetailEquipe detailEquipe;

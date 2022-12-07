@@ -9,9 +9,11 @@ public interface IEquipeService {
 
     Equipe addEquipe(Equipe e);
 
-    Equipe updateEquipe (Equipe e);
+    Equipe updateEquipe(Equipe e);
 
-    Equipe retrieveEquipe (Integer idEquipe);
+    Equipe retrieveEquipe(Integer idEquipe);
 
     void deleteEquipe(Integer equipeId);
+
+    void faireEvoluerEquipes();
 }
